@@ -10,4 +10,5 @@ trait Subscription {
   def unsubscribe(channel: String, handle: String): IO[Unit]
 
   def publish(channel: String, handle: String, message: String): IO[Unit]
+
 }

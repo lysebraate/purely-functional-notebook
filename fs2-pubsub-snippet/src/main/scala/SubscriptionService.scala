@@ -119,4 +119,12 @@ case class SubscriptionService(
     bb
   }
 
+  def createChannel(channel: String): IO[Unit] = {
+    for {
+      newTopic <- Topic[IO, String]
+      _ <- topics.update(f => f.updated(channel, newTopic))
+      _ <- signallingRef.update(f => f.updated(channel, List()))
+    } yield ()
+  }
+
 }
